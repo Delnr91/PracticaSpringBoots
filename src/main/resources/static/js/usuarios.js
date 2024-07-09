@@ -8,9 +8,9 @@ $(document).ready(function() {
 
 async function cargarUsuarios(){
 
-        //funcion fetch para llamar a un servidor
+        //Función fetch para llamar a un servidor
 
-      const request = await fetch('usuarios', {
+      const request = await fetch('api/usuarios', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -19,13 +19,17 @@ async function cargarUsuarios(){
       });
       const usuarios = await request.json();
 
+
        //variable para el listado del html
        let listadoHtml = '';
       for (let usuario of usuarios){
 
+            //variable para el Boton Eliminar
+            let btnEliminar = '<a href="#" onclick="eliminarUsuario(' + usuario.id + ')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"> </i></a>' ;
+
             let usuarioHtml = '<tr><td>' + usuario.id + '</td><td>' + usuario.nombre + ' ' + usuario.apellido + '</td> <td>'
                               + usuario.email + '</td><td>' + usuario.telefono
-                              + '</td><td><a href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"> </i></a></td></tr>';
+                              + '</td><td>' + btnEliminar  + '</td></tr>';
             listadoHtml += usuarioHtml;
       }
 
@@ -38,3 +42,8 @@ async function cargarUsuarios(){
     document.querySelector('#usuarios tbody').outerHTML = listadoHtml;
 
 }
+    //Función para Eliminar el usuario
+
+    function eliminarUsuario(id) {
+        alert(id);
+    }

@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface UsuarioDao {
 
-
+    //Metodo para Traer Usuarios
     List<Usuario> getUsuarios();
+
+    //Metodo para Eliminar Usuarios
+    void eliminar(Long id);
 }
