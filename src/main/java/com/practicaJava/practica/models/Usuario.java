@@ -1,9 +1,6 @@
 package com.practicaJava.practica.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +11,10 @@ import lombok.ToString;
 @ToString @EqualsAndHashCode
 public class Usuario {
 
-    @Getter @Setter @Column(name = "id")
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter @Setter @Column(name = "id")
     private Long id;
     @Getter @Setter @Column(name = "nombre")
     private String nombre;

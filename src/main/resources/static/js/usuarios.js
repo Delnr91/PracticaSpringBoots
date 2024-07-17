@@ -27,8 +27,10 @@ async function cargarUsuarios(){
             //variable para el Boton Eliminar
             let btnEliminar = '<a href="#" onclick="eliminarUsuario(' + usuario.id + ')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"> </i></a>' ;
 
+            let telefonoTexto = usuario.telefono == null? '-' : usuario.telefono;
+
             let usuarioHtml = '<tr><td>' + usuario.id + '</td><td>' + usuario.nombre + ' ' + usuario.apellido + '</td> <td>'
-                              + usuario.email + '</td><td>' + usuario.telefono
+                              + usuario.email + '</td><td>' + telefonoTexto
                               + '</td><td>' + btnEliminar  + '</td></tr>';
             listadoHtml += usuarioHtml;
       }
@@ -44,6 +46,23 @@ async function cargarUsuarios(){
 }
     //Función para Eliminar el usuario
 
-    function eliminarUsuario(id) {
-        alert(id);
+
+    async function eliminarUsuario(id) {
+
+    //!confirm para que entre el if solo si se apreta en cancelar, de lo contrario siga el proceso,
+
+       if (!confirm('¿Desea eliminar este usuario?')){
+            return;
+        }
+
+       const request = await fetch('api/usuarios/' + id, {
+            method: 'DELETE',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          });
+
+          //variable para relogear pagina
+        location.reload()
     }

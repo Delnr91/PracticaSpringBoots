@@ -4,10 +4,7 @@ package com.practicaJava.practica.controllers;
 import com.practicaJava.practica.dao.UsuarioDao;
 import com.practicaJava.practica.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -21,18 +18,23 @@ public class UsuarioController {
 
     @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.GET)
     public Usuario getUsuario(@PathVariable long id){
-        Usuario usu = new Usuario();
-        usu.setId(id);
-        usu.setNombre("Daniel");
-        usu.setApellido("Nuñez");
-        usu.setEmail("invdesdev@outlook.com");
-        usu.setTelefono("9410333333");
-        return usu;
+        Usuario usuario = new Usuario();
+        usuario.setId(id);
+        usuario.setNombre("Daniel");
+        usuario.setApellido("Nuñez");
+        usuario.setEmail("invdesdev@outlook.com");
+        usuario.setTelefono("9410333333");
+        return usuario;
     }
 
-    @RequestMapping(value = "api/usuarios")
+    @RequestMapping(value = "api/usuarios", method = RequestMethod.GET)
     public List<Usuario> getUsuarios(){
         return usuarioDao.getUsuarios();
+    }
+
+    @RequestMapping(value = "api/usuarios", method = RequestMethod.POST)
+    public void registrarUsuario(@RequestBody Usuario usuario){
+         usuarioDao.registrar(usuario);
     }
 
     @RequestMapping(value = "usu12")
