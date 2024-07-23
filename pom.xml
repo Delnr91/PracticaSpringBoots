@@ -63,7 +63,24 @@
 			<scope>provided</scope>
 		</dependency>
 
-    </dependencies>
+		<dependency>
+			<groupId>de.mkammerer</groupId>
+			<artifactId>argon2-jvm</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-endorsed-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>

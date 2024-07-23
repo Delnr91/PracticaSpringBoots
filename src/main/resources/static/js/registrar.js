@@ -31,5 +31,6 @@ $(document).ready(function() {
         },
         body: JSON.stringify(datos)
       });
-
+    alert("La cuenta fu creada con exito!");
+    window.location.href = 'login.html'
 }

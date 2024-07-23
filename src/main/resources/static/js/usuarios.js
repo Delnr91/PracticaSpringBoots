@@ -4,7 +4,14 @@ $(document).ready(function() {
     cargarUsuarios();
 
   $('#usuarios').DataTable();
+
+  actualizarEmailDelUsuario();
+
 });
+
+function actualizarEmailDelUsuario(){
+    document.getElementById('txt-email-usuario').outerHTML = localStorage.email;
+}
 
 async function cargarUsuarios(){
 
@@ -12,10 +19,7 @@ async function cargarUsuarios(){
 
       const request = await fetch('api/usuarios', {
         method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
+        headers: getHeaders()
       });
       const usuarios = await request.json();
 
@@ -44,9 +48,16 @@ async function cargarUsuarios(){
     document.querySelector('#usuarios tbody').outerHTML = listadoHtml;
 
 }
+
+    function getHeaders(){
+     return {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json',
+                   'Authorization': localStorage.token
+                };
+
+    }
     //Función para Eliminar el usuario
-
-
     async function eliminarUsuario(id) {
 
     //!confirm para que entre el if solo si se apreta en cancelar, de lo contrario siga el proceso,
@@ -57,10 +68,7 @@ async function cargarUsuarios(){
 
        const request = await fetch('api/usuarios/' + id, {
             method: 'DELETE',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
+            headers: getHeaders()
           });
 
           //variable para relogear pagina
